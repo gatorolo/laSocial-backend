@@ -1,10 +1,10 @@
 package com.todo.list.Controller;
 
 
-import com.todo.list.Models.Task;
-import com.todo.list.Repository.TodoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import com.todo.list.Models.Producto;
+import com.todo.list.Services.TodoService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,31 +12,37 @@ import java.util.List;
 @RestController
 @RequestMapping("/productos")
 public class todoController {
-      @Autowired
-      private TodoRepository todoRepository;
 
-      @GetMapping("/all")
-        public List<Task> getTasks(){
-          return todoRepository.findAll();
+      private final TodoService todoService;
+
+    public todoController(TodoService todoService) {
+        this.todoService = todoService;
+    }
+
+
+
+    @GetMapping("/all")
+        public ResponseEntity<List<Producto>>  getProduct(){
+         List<Producto>  productos = todoService.getProduct();
+          return new ResponseEntity<>(productos, HttpStatus.OK);
       }
 
 
       @PostMapping("/add")
-        public String saveTask(@RequestBody Task task) {
-          todoRepository.save(task);
-          return "saved task";
+        public ResponseEntity<Producto> saveProduct(@RequestBody Producto producto) {
+         Producto nuevoProducto = todoService.addProduct(producto);
+          return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
       }
 
       @PutMapping("/update")
-        public String updateTask( @RequestBody Task task) {
-          todoRepository.save(task);
-          return "updated task";
+        public ResponseEntity<Producto> updateProduct(@RequestBody Producto producto) {
+          Producto updateProducto = todoService.updateProduct(producto);
+          return new ResponseEntity<>(updateProducto, HttpStatus.OK);
       }
 
       @DeleteMapping("/delete/{id}")
-    public String deleteTask(@PathVariable long id) {
-          Task deletedTask = todoRepository.findById(id).get();
-             todoRepository.delete(deletedTask);
-          return "deleted task";
+       public ResponseEntity<?> deleteProduct(@PathVariable("id") long id) {
+           todoService.deleteProduct(id);
+          return new ResponseEntity<>(HttpStatus.OK);
       }
 }

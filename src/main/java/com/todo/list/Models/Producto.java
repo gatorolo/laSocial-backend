@@ -2,33 +2,39 @@ package com.todo.list.Models;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(schema = "TasksCrud")
-public class Task {
+public class Producto {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotNull
     @Column
     private String img;
+
+    @NotNull
     @Column
     private String titulo;
+
+    @NotNull
     @Column
     private int precio;
-    @Column
-    private String descripcion;
+
+    @NotNull
     @Column
     private int cantidad;
 
-    public Task() {
+    public Producto() {
+
     }
 
-    public Task(Long id, String img, String titulo, int precio, String descripcion,int cantidad) {
+    public Producto(Long id, String img, String titulo, int precio, int cantidad) {
         this.id = id;
         this.img = img;
         this.titulo = titulo;
         this.precio = precio;
-        this.descripcion = descripcion;
         this.cantidad = cantidad;
     }
 
@@ -62,14 +68,6 @@ public class Task {
 
     public void setPrecio(int precio) {
         this.precio = precio;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public int getCantidad() {
