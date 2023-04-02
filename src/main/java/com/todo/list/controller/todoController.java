@@ -1,4 +1,4 @@
-package com.todo.list.Controller;
+package com.todo.list.controller;
 
 
 import com.todo.list.Models.Producto;
