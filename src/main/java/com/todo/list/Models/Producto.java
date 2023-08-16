@@ -4,38 +4,33 @@ package com.todo.list.Models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+
 @Entity
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
     private Long id;
-
-    @NotNull
     @Column
-    private String img;
-
     @NotNull
-    @Column
-    private String titulo;
+    private Long precio;
 
-    @NotNull
     @Column
-    private int precio;
+    @NotNull
+    private String plato;
 
-    @NotNull
     @Column
-    private int cantidad;
+    @NotNull
+    private Long precio2;
 
     public Producto() {
-
     }
 
-    public Producto(Long id, String img, String titulo, int precio, int cantidad) {
+    public Producto(Long id, String plato, Long precio, Long precio2) {
         this.id = id;
-        this.img = img;
-        this.titulo = titulo;
+        this.plato = plato;
         this.precio = precio;
-        this.cantidad = cantidad;
+        this.precio2 = precio2;
     }
 
     public Long getId() {
@@ -46,35 +41,27 @@ public class Producto {
         this.id = id;
     }
 
-    public String getImg() {
-        return img;
+    public String getPlato() {
+        return plato;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setPlato(String plato) {
+        this.plato = plato;
     }
 
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public int getPrecio() {
+    public Long getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(Long precio) {
         this.precio = precio;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public Long getPrecio2() {
+        return precio2;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setPrecio2(Long precio2) {
+        this.precio2 = precio2;
     }
 }

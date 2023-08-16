@@ -30,7 +30,6 @@ public class TodoService {
     }
 
     public void deleteProduct(Long id){
-
         todoRepository.deleteById(id);
     }
 
